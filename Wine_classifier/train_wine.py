@@ -36,11 +36,11 @@ if __name__ == "__main__":
     np.random.seed(40)
 
     # Read the wine-quality csv file from the URL
-    csv_url = (
-        "/Users/nikolaus/Documents/trail/documentation/Quickstart_example/winequality-red.csv"
-    )
+    csv_url = ("winequality-red.csv")
     try:
         data = pd.read_csv(csv_url, sep=";")
+        print(data.head())
+        print("data")
     except Exception as e:
         logger.exception(
             "Unable to download training & test CSV, check your internet connection. Error: %s", e
@@ -62,8 +62,6 @@ if __name__ == "__main__":
     profile = ProfileReport(train_x, title="Ydata Profiling Report")
     profil = profile.to_file(PROFILE_PATH)
 
-
-
     with mlflow.start_run():
         with Trail("myProjectAlias") as trail:
             trail.put_hypothesis("next step")
@@ -76,7 +74,8 @@ if __name__ == "__main__":
 
             (rmse, mae, r2) = eval_metrics(test_y, predicted_qualities)
 
-            print("Elasticnet model (alpha={:f}, l1_ratio={:f}):".format(alpha, l1_ratio))
+            print("Elasticnet model (alpha={:f}, l1_ratio={:f}):".format(
+                alpha, l1_ratio))
             print("  RMSE: %s" % rmse)
             print("  MAE: %s" % mae)
             print("  R2: %s" % r2)

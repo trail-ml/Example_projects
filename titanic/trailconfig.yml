@@ -1,0 +1,6 @@
+username: <your username>
+password: <your password>
+projects:
+  myProjectAlias:
+    id: <your project id>
+    parentExperimentId: <your experiment id>
